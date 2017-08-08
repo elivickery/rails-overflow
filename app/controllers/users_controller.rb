@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 class UsersController < ApplicationController
   before_action :set_users, only: [:show, :edit, :update, :destroy]
 
@@ -14,6 +16,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.password = params[:user][:password]
     @user.save
     redirect_to user_path(@user)
   end
